@@ -2,48 +2,8 @@
 <html>
 <head>
     <title>Smart Expense Manager</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 
-<style>
-body {
-    margin: 0;
-    font-family: 'Segoe UI';
-    background: #0f172a;
-    color: white;
-    display: flex;
-}
-
-.sidebar {
-    width: 220px;
-    background: #020617;
-    height: 100vh;
-    padding: 20px;
-}
-
-.sidebar a {
-    display: block;
-    color: #94a3b8;
-    margin: 10px 0;
-    text-decoration: none;
-}
-
-.sidebar a:hover {
-    color: white;
-}
-
-.main {
-    flex: 1;
-    padding: 30px;
-}
-
-.list li {
-    background: #1e293b;
-    margin: 10px 0;
-    padding: 12px;
-    border-radius: 6px;
-    display: flex;
-    justify-content: space-between;
-}
-</style>
 
 </head>
 
