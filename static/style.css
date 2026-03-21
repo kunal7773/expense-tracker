@@ -180,6 +180,7 @@ button:hover {
 
 @media (max-width: 768px) {
     .logo img {
-        width: 90px;
+        width: 130px;
+        height: 60px;
     }
 }

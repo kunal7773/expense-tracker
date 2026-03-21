@@ -6,13 +6,18 @@ app = Flask(__name__)
 def get_db():
     return sqlite3.connect("database.db")
 
+# HOME → redirect to dashboard
 @app.route('/')
+def home():
+    return redirect('/dashboard')
+
+# DASHBOARD
+@app.route('/dashboard')
 def dashboard():
     db = get_db()
     expenses = db.execute("SELECT * FROM expenses").fetchall()
 
     total = sum([e[2] for e in expenses])
-
     labels = [e[1] for e in expenses]
     values = [e[2] for e in expenses]
 
@@ -31,14 +36,14 @@ def add():
     db = get_db()
     db.execute("INSERT INTO expenses (title, amount) VALUES (?, ?)", (title, amount))
     db.commit()
-    return redirect('/')
+    return redirect('/dashboard')
 
 @app.route('/delete/<int:id>')
 def delete(id):
     db = get_db()
     db.execute("DELETE FROM expenses WHERE id=?", (id,))
     db.commit()
-    return redirect('/')
+    return redirect('/dashboard')
 
 @app.route('/expenses')
 def expenses_page():
