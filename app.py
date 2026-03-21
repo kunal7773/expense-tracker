@@ -58,4 +58,5 @@ def reports():
     total = sum([e[2] for e in expenses])
     return render_template("reports.html", total=total)
 
-app.run(debug=True)
+if __name__ == "__main__":
+    app.run(debug=True)
