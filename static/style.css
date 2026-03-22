@@ -12,6 +12,7 @@ body {
     color: white;
     display: flex;
     min-height: 100vh;
+    overflow-x: hidden;
 }
 
 /* SIDEBAR */
@@ -19,10 +20,14 @@ body {
     width: 230px;
     background: #020617;
     padding: 25px 15px;
+    transition: 0.3s ease;
+    flex-shrink: 0;
+    z-index: 1000;
 }
 
-.sidebar h2 {
-    margin-bottom: 25px;
+/* Laptop par hide karne ke liye */
+.sidebar.hidden {
+    margin-left: -230px;
 }
 
 .sidebar a {
@@ -41,24 +46,20 @@ body {
 .main {
     flex: 1;
     padding: 30px;
+    transition: 0.3s ease;
+    width: 100%;
 }
 
-/* NAVBAR */
-.navbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+/* TOGGLE BUTTON STYLE (Purple Blue) */
+.toggle-btn {
+    background: #6366f1;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 6px;
+    cursor: pointer;
     margin-bottom: 20px;
-}
-
-.logo {
-    font-size: 20px;
-    font-weight: bold;
-}
-
-.nav-links {
-    display: flex;
-    gap: 15px;
+    font-size: 16px;
 }
 
 /* CARDS */
@@ -74,14 +75,9 @@ body {
     padding: 20px;
     border-radius: 12px;
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
-    transition: 0.3s;
 }
 
-.card:hover {
-    transform: translateY(-5px);
-}
-
-/* FORM */
+/* --- FORM & ADD BUTTON FIX --- */
 .form {
     display: flex;
     gap: 10px;
@@ -90,32 +86,28 @@ body {
 
 .form input {
     flex: 1;
-    padding: 10px;
+    padding: 12px;
     border: none;
     border-radius: 6px;
     background: #334155;
     color: white;
 }
 
-button {
-    padding: 10px 15px;
-    border: none;
-    border-radius: 6px;
+/* Isse Add button bada dikhega */
+.form button {
     background: #6366f1;
     color: white;
+    border: none;
+    padding: 10px 25px;
+    /* Thoda side padding badha di */
+    border-radius: 6px;
     cursor: pointer;
-    transition: 0.3s;
-}
-
-button:hover {
-    background: #4f46e5;
+    font-weight: bold;
+    min-width: 100px;
+    /* Chhota hone se rokega */
 }
 
 /* LIST */
-.list {
-    list-style: none;
-}
-
 .list li {
     display: flex;
     justify-content: space-between;
@@ -125,62 +117,76 @@ button:hover {
     border-radius: 6px;
 }
 
-/* MOBILE RESPONSIVE */
-@media (max-width: 768px) {
+/* LOGO */
+.logo img {
+    width: 120px;
+    height: auto;
+    border-radius: 10px;
+}
 
+/* --- RESPONSIVE LOGIC --- */
+
+/* Laptop (Desktop) view mein Menu button hide karein */
+@media (min-width: 769px) {
+    .toggle-btn {
+        display: none !important;
+    }
+
+    .sidebar {
+        margin-left: 0 !important;
+    }
+}
+
+/* Mobile view settings */
+@media (max-width: 768px) {
     body {
         flex-direction: column;
     }
 
     .sidebar {
-        width: 100%;
-        display: flex;
-        justify-content: space-around;
-        height: auto;
+        position: fixed;
+        left: -230px;
+        height: 100vh;
+        width: 230px;
+    }
+
+    .sidebar.active {
+        left: 0 !important;
     }
 
     .main {
         padding: 15px;
     }
 
-    .cards {
-        flex-direction: column;
-    }
-
+    .cards,
     .form {
         flex-direction: column;
     }
 
-    button {
+    .form button {
         width: 100%;
+        /* Mobile par full width button */
     }
 
-    .nav-links {
-        display: none;
+    .toggle-btn {
+        display: block;
     }
 }
 
-.logo {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 20px;
-}
-
-.logo img {
-    width: 120px;
-    height: auto;
-    border-radius: 10px;
-    transition: 0.3s;
-}
-
-.logo img:hover {
-    transform: scale(1.05);
+/* Close Button Styling */
+.close-btn {
+    display: none;
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    font-size: 30px;
+    color: white;
+    cursor: pointer;
 }
 
 @media (max-width: 768px) {
-    .logo img {
-        width: 130px;
-        height: 60px;
+    .close-btn {
+        display: block;
+        /* Sirf mobile sidebar mein dikhega */
     }
 }
